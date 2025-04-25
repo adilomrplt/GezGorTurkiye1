@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Mekan Listesi";
+    var mekanlar = ViewBag.Mekanlar as IEnumerable<dynamic> ?? new List<dynamic>();
+    var rotaTipi = ViewBag.RotaTipi as string ?? "";
+}
+
+<!-- Rota Seçimi Butonları -->
+<div class="btn-group mb-3">
+    <a href="/Mekan/Index?rota=manuel" class="btn btn-outline-light"><i class="fas fa-hand-pointer"></i> Kendim Sıralayacağım</a>
+    <a href="/Mekan/Index?rota=otomatik" class="btn btn-outline-success"><i class="fas fa-route"></i> Sistem Rota Önersin</a>
+</div>
+
+<!-- Grid Yapısı: Liste ve Harita -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Mekan Tablosu -->
+        <div class="col-md-6 mb-4">
+            <a href="/Mekan/Ekle" class="btn btn-outline-success mb-3"><i class="fas fa-plus-circle"></i> Yeni Mekan Ekle</a>
+
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Kategori</th>
+                            <th>Açıklama</th>
+                            <th>Şehir</th>
+                            <th>Sıra No</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var mekan in mekanlar)
+                        {
+                            <tr>
+                                <td>@mekan.Ad</td>
+                                <td>@mekan.Kategori</td>
+                                <td>@mekan.Aciklama</td>
+                                <td>@mekan.SehirAdi</td>
+                                <td>@mekan.SiraNo</td>
+                                <td>
+                                    <a href="/Mekan/Guncelle/@mekan.Id" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Güncelle</a>
+                                    <a href="/Mekan/Sil/@mekan.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Sil</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Harita Alanı -->
+        <div class="col-md-6">
+            <div id="harita" style="height: 600px;" class="rounded shadow border"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<!-- Harita JS -->
+<script>
+    var map = L.map('harita').setView([37.0, 35.3213], 7); // Türkiye merkezi
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+    }).addTo(map);
+
+    var rotaKoordinatlar = [];
+
+    @foreach (var mekan in mekanlar)
+    {
+        if (!string.IsNullOrEmpty(mekan.Konum) && mekan.Konum.Contains(","))
+        {
+            var konum = mekan.Konum.Split(',');
+            var enlem = konum[0];
+            var boylam = konum[1];
+
+            <text>
+                        var customIcon = L.divIcon({
+                            html: '<i class="fas fa-map-marker-alt fa-2x text-danger"></i>',
+                            iconSize: [20, 20],
+                            className: ''
+                        });
+
+                        var marker = L.marker([@enlem, @boylam], { icon: customIcon })
+                            .bindPopup("<b>@mekan.Ad</b><br>@mekan.Aciklama<br><i>Sıra: @mekan.SiraNo</i>");
+                        marker.addTo(map);
+                        rotaKoordinatlar.push([@enlem, @boylam]);
+            </text>
+        }
+    }
+
+    if (rotaKoordinatlar.length > 1) {
+        var polyline = L.polyline(rotaKoordinatlar, { color: 'blue' }).addTo(map);
+        map.fitBounds(polyline.getBounds());
+    }
+</script>

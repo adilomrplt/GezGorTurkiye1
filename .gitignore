@@ -1,0 +1,18 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build klasörleri
+bin/
+obj/
+
+# Ayarlar
+appsettings.json
+
+# Sistem
+*.log
+*.DS_Store
+
+# VS Code
+.vscode/
