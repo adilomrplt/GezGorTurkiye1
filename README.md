@@ -41,7 +41,7 @@ Türkiye'deki şehirler ve mekanlar için rota planlayıcı web uygulaması.
 
 ---
 
-## ✨ Gelecek Geliştirmeler
+## ✨ Yapılabilecek Geliştirmeler
 - Kullanıcı giriş sistemi.
 - Canlı etkinlik verileri entegrasyonu.
 - Fotoğraf ve yorum ekleme özellikleri.
