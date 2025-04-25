@@ -1,4 +1,4 @@
-# 🌍 GezGörTürkiye1
+#  GezGörTürkiye1
 
 Türkiye'deki şehirler ve mekanlar için rota planlayıcı web uygulaması.
 
@@ -8,7 +8,7 @@ Türkiye'deki şehirler ve mekanlar için rota planlayıcı web uygulaması.
   - Yeni şehir ve mekan ekleyebilir, mevcut kayıtları güncelleyebilir veya silebilirsiniz.
   - Mekan bilgileri: Ad, Kategori, Açıklama, Şehir, Harita Konumu.
 
-- **🗺️ Rota Planlama**
+- **🗺 Rota Planlama**
   - **Sistem Rota Önerisi:** Mekanları konumlarına göre en yakın olandan başlatır.
   - **Manuel Rota:** Kullanıcı, mekan sıralamasını kendi belirleyebilir.
 
@@ -22,7 +22,7 @@ Türkiye'deki şehirler ve mekanlar için rota planlayıcı web uygulaması.
 
 ---
 
-## ⚙ Teknolojiler
+## Teknolojiler
 
 - **Backend:** ASP.NET Core MVC
 - **Frontend:** HTML, CSS, Bootstrap, Leaflet.js
