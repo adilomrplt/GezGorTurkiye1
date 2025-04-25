@@ -1,18 +1,19 @@
-# Visual Studio
-.vs/
-*.user
-*.suo
-
-# Build klasörleri
+# Build
 bin/
 obj/
 
-# Ayarlar
-appsettings.json
+# VS
+.vs/
+*.user
 
-# Sistem
+# Loglar
 *.log
-*.DS_Store
 
-# VS Code
-.vscode/
+# Veritabanlarý
+*.db
+*.mdf
+*.ldf
+
+# Config
+appsettings.json
+appsettings.Development.json
